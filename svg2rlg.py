@@ -1498,6 +1498,21 @@ def svg2rlg(filename):
     return renderer.render(xml)
 
 
+def svg2rlg_fromstring(string):
+    """
+    Parse svg file from string and return reportlab drawing object
+    """
+
+    root = etree.fromstring(string)
+
+    if not root.tag == Renderer.SVG_ROOT:
+        raise SVGError("Expected SVG fragment as root object")
+
+    renderer = Renderer(string)
+
+    return renderer.render(root)
+
+
 if __name__ == "__main__":
     import sys
     import os
